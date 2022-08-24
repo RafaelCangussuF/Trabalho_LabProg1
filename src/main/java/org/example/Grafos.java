@@ -26,11 +26,8 @@ public class Grafos {
         double delta2 = Math.abs(loi-loj);
 
         double a = Math.pow(Math.sin(delta1/2),2)+ Math.cos(lai)*(Math.cos(laj))*(Math.pow(Math.sin(delta2/2),2));
-        double c = Math.abs(2*(1/Math.tan((Math.pow(a,0.5))/Math.pow(1-a,0.5))));
-        return 6.371*c;
-
-        //double b = 2*6.371*(Math.asin(Math.pow((Math.pow(Math.sin())))))
-
+        double resultado = 2*6.371*(Math.asin(Math.pow(a,0.5)));
+        return resultado;
     }
     public static Graph exampleGraph() {
         List<Aeroporto> air = new ArrayList<>();
@@ -64,7 +61,7 @@ public class Grafos {
         while(i<40){
             j=i;
             while(j<40) {
-                int lai, loi, laj, loj;
+                //int lai, loi, laj, loj;
                 g.addEdge(air.get(i).getSigla()+air.get(j).getSigla(), air.get(i).getSigla(), air.get(j).getSigla()).setAttribute("length", d(Double.parseDouble(air.get(i).getLatitude()), Double.parseDouble(air.get(i).getLongitude()), Double.parseDouble(air.get(j).getLatitude()), Double.parseDouble(air.get(j).getLongitude())));
                 j++;
             }
