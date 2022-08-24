@@ -9,11 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
-import static org.example.LerCsv.readData;
+import static org.example.SQL.ResultadoSQL;
 
 public class Grafos {
-    private static final String CSV_Path = "C:\\Users\\rafae\\OneDrive\\Área de Trabalho\\3º Ano\\2 semestre\\LabProg2\\airportData.csv";
+    //private static final String CSV_Path = "C:\\Users\\rafae\\OneDrive\\Área de Trabalho\\3º Ano\\2 semestre\\LabProg2\\airportData.csv";
 
 
     public static double d(Double lai, Double loi, Double laj, Double loj){
@@ -31,7 +30,7 @@ public class Grafos {
     }
     public static Graph exampleGraph() {
         List<Aeroporto> air = new ArrayList<>();
-        List<String[]> Data = readData(CSV_Path);
+     /*   List<String[]> Data = readData(CSV_Path);
 
         for (String[] row : Data) {
             Aeroporto aero = new Aeroporto();
@@ -49,10 +48,12 @@ public class Grafos {
             }
             air.add(aero);
             System.out.println();
-        }
+        }*/
 
+        air.addAll(ResultadoSQL());
         Graph g = new SingleGraph("Aeroportos");
         int i=0, j;
+
         while(i<40){
             g.addNode(air.get(i).getSigla());
             i++;
@@ -62,36 +63,13 @@ public class Grafos {
             j=i;
             while(j<40) {
                 //int lai, loi, laj, loj;
-                g.addEdge(air.get(i).getSigla()+air.get(j).getSigla(), air.get(i).getSigla(), air.get(j).getSigla()).setAttribute("length", d(Double.parseDouble(air.get(i).getLatitude()), Double.parseDouble(air.get(i).getLongitude()), Double.parseDouble(air.get(j).getLatitude()), Double.parseDouble(air.get(j).getLongitude())));
+                //g.addEdge(air.get(i).getSigla()+air.get(j).getSigla(), air.get(i).getSigla(), air.get(j).getSigla()).setAttribute("length", d(Double.parseDouble(air.get(i).getLatitude()), Double.parseDouble(air.get(i).getLongitude()), Double.parseDouble(air.get(j).getLatitude()), Double.parseDouble(air.get(j).getLongitude())));
+                g.addEdge(air.get(i).getSigla()+air.get(j).getSigla(),air.get(i).getSigla(),air.get(j).getSigla()  ).setAttribute("length", d(air.get(i).getLatitude(), air.get(i).getLongitude(), air.get(j).getLatitude(), air.get(j).getLongitude()));
                 j++;
             }
             i++;
         }
 
-
-
-       /* g.addNode("A").setAttribute("xy", 0, 1);
-        g.addNode("B").setAttribute("xy", 1, 2);
-        g.addNode("C").setAttribute("xy", 1, 1);
-        g.addNode("D").setAttribute("xy", 1, 0);
-        g.addNode("E").setAttribute("xy", 2, 2);
-        g.addNode("F").setAttribute("xy", 2, 1);
-        g.addNode("G").setAttribute("xy", 2, 0);
-
-
-        g.addEdge("AB", "A", "B").setAttribute("length", 14);
-        g.addEdge("AC", "A", "C").setAttribute("length", 9);
-        g.addEdge("AD", "A", "D").setAttribute("length", 7);
-        g.addEdge("BC", "B", "C").setAttribute("length", 2);
-        g.addEdge("CD", "C", "D").setAttribute("length", 10);
-        g.addEdge("BE", "B", "E").setAttribute("length", 9);
-        g.addEdge("CF", "C", "F").setAttribute("length", 11);
-        g.addEdge("DF", "D", "F").setAttribute("length", 15);
-        g.addEdge("EF", "E", "F").setAttribute("length", 6);
-
-        g.nodes().forEach(n -> n.setAttribute("label", n.getId()));
-        g.edges().forEach(e -> e.setAttribute("label", "" + (int) e.getNumber("length")));
-*/
         return g;
     }
 

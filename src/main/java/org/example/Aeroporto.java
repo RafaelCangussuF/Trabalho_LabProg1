@@ -3,10 +3,10 @@ package org.example;
 
 public class Aeroporto {
     private String sigla;
-    private String Latitude, longitude;
+    private double Latitude, longitude;
     private String Estado, Municipio;
 
-    public Aeroporto(String sigla1, String Estado1, String Municipio1, String Latitude1, String longitude1){
+    public Aeroporto(String sigla1, String Estado1, String Municipio1, double Latitude1, double longitude1){
         setEstado(Estado1);
         setLatitude(Latitude1);
         setSigla(sigla1);
@@ -28,20 +28,20 @@ public class Aeroporto {
     public String getMunicipio(){
         return this.Municipio;
     }
-    public String getLatitude(){
+    public double getLatitude(){
         return this.Latitude;
     }
-    public String getLongitude(){
+    public double getLongitude(){
         return this.longitude;
     }
     public void setSigla(String sigla1){
         this.sigla = sigla1;
     }
 
-    public void setLatitude(String l){
+    public void setLatitude(double l){
         this.Latitude = l;
     }
-    public void setLongitude(String l){
+    public void setLongitude(double l){
         this.longitude = l;
     }
     public void setEstado(String state){

@@ -1,4 +1,4 @@
-package org.example;
+/*package org.example;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
@@ -62,7 +62,7 @@ public class LerCsv {
                     System.out.print(cell + "\t");
                 }
                 System.out.println();
-            }*/
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,3 +70,4 @@ public class LerCsv {
         return allData;
     }
 }
+*/
