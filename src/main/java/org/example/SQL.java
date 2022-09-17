@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQL {
+    //ResultadoSQL conecta-se ao banco de dados e retorna a lista de aeroportos
     public static List<Aeroporto> ResultadoSQL() {
         List<Aeroporto> air = new ArrayList<>();
         try {
@@ -12,7 +13,7 @@ public class SQL {
 
             Statement statement = connection.createStatement();
 
-            ResultSet resultSet = statement.executeQuery("select * from airportData2");
+            ResultSet resultSet = statement.executeQuery("select * from airportData3");
             while (resultSet.next()) {
                 Aeroporto aero = new Aeroporto();
                 aero.setSigla(resultSet.getString("Sigla"));
@@ -30,13 +31,14 @@ public class SQL {
         return air;
 
     }
+    //InserirSQL insere o caminho pesquisado com o primeiro nó sendo a origem e o último o destino
+    //Junto com a pesquisa é colocado um ID que identifica a ordem e diferencia caminhos iguais
     public static void InserirSQL(String pesquisa, int i) {
 
         try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos", "root", "Rcfecfccf3108!");
 
             Statement statement = connection.createStatement();
-
 
 
             String sql = "INSERT INTO `jdbc-aeroportos`.`historico`\n" +

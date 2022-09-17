@@ -12,9 +12,6 @@ import static org.example.SQL.InserirSQL;
 import static org.example.SQL.ResultadoSQL;
 
 public class Grafos {
-    //private static final String CSV_Path = "C:\\Users\\rafae\\OneDrive\\Área de Trabalho\\3º Ano\\2 semestre\\LabProg2\\airportData.csv";
-
-
     //Função de nome d(abreviação de distância) usada para calcular a distância entre dois aeroportos a partir de suas coordenadas
     public static double d(Double lai, Double loi, Double laj, Double loj){
         lai = Math.toRadians(lai);
@@ -28,10 +25,30 @@ public class Grafos {
         double a = Math.pow(Math.sin(delta1/2),2)+ Math.cos(lai)*(Math.cos(laj))*(Math.pow(Math.sin(delta2/2),2));
         return 2*6.371*(Math.asin(Math.pow(a,0.5)));
     }
+    //Menu é utilizado para receber uma sigla de estado e devolver a sigla dos aeroportos internacionais daquele estado
+    public static String Menu(String Sigla_Estado){
+        //Criando a lista com os aeroportos
+        List<Aeroporto> air = new ArrayList<>();
+        air.addAll(ResultadoSQL());
+        Scanner scan = new Scanner(System.in);
+        String Sigla_Aeroporto_retorno;
+        int i =0;
+        //Printando as siglas dos aeroportos de dado estado
+        while(i<40){
+            if(air.get(i).getEstado().equals(Sigla_Estado)){
+                System.out.println(air.get(i).getSigla());
+            }
+            i++;
+        }
+        System.out.println("Digite a sigla do aeroporto desejado:");
+        Sigla_Aeroporto_retorno = scan.nextLine();
+        //retornando a sigla do aeroporto selecionado
+        return Sigla_Aeroporto_retorno;
+    }
+
     public static Graph exampleGraph() {
         // Inicialização do grafo a partir dos dados existentes no Banco de dados
         List<Aeroporto> air = new ArrayList<>();
-
         air.addAll(ResultadoSQL());
         Graph g = new SingleGraph("Aeroportos");
         int i=0, j;
@@ -59,36 +76,23 @@ public class Grafos {
         boolean game = true;
         Graph g = exampleGraph();
 
-        // Edge lengths are stored in an attribute called "length"
-        // The length of a path is the sum of the lengths of its edges
+        // Comprimento das arestas é armazenado no atributo length
+        // O comprimento de um caminho é a soma dos comprimentos(length) das arestas do caminho
         Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, null, "length");
 
 
-        /*
-        // Compute the shortest paths in g from A to all nodes
-        dijkstra.init(g);
-        dijkstra.setSource(g.getNode("A"));
-        dijkstra.compute();
-
-        // Print the lengths of all the shortest paths
-        for (Node node : g)
-            System.out.printf("%s->%s:%10.2f%n", dijkstra.getSource(), node,
-                    dijkstra.getPathLength(node));
-
-
-        // Print the shortest path from A to B
-        System.out.println(dijkstra.getPath(g.getNode("B")));
-        */
         Scanner scan = new Scanner(System.in);
         int escolha;
         String a, b, c;
         while(game) {
 
             // Recebimento dos dados para realisar a pesquisa
-            System.out.println("Digite o no de inicio: ");
+            System.out.println("Digite o estado do no de origem: ");
             a = scan.nextLine();
-            System.out.println("Digite o no de fim:");
+            a = Menu(a);
+            System.out.println("Digite o estado do no de destino: ");
             b = scan.nextLine();
+            b = Menu(b);
 
             //Inicialização do algoritmo de dijkstra a partir do nó de origem dado
             dijkstra.init(g);
@@ -97,12 +101,6 @@ public class Grafos {
             //Remoção da aresta entre origem e destino para garantir um caminho com no mínimo 1 escala
             g.removeEdge(g.getNode(a), g.getNode(b));
             dijkstra.compute();
-
-            //Parte comentada a seguir é a impressão do comprimento de todos os caminhos a partir do nó de início
-            /*for (Node node : g)
-                System.out.printf("%s->%s:%10.2f%n", dijkstra.getSource(), node,
-                        dijkstra.getPathLength(node));*/
-
 
             //Impressão do menor caminho entre origem e destino e de qual caminho ele é
             System.out.println(dijkstra.getPath(g.getNode(b)));
