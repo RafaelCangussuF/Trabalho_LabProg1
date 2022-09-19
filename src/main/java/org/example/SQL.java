@@ -36,7 +36,7 @@ public class SQL {
     public static void InserirSQL(String pesquisa, int i) {
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos", "root", "Rcfecfccf3108!");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos", "root", "toor");
 
             Statement statement = connection.createStatement();
 
