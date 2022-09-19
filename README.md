@@ -6,7 +6,7 @@ do pdf.
 
 Caso não seja visto, segue o link para acesso:
 
-https://github.com/RafaelCangussuF/Trabalho_LabProg2_Aeroportos/edit/master/README.md
+https://github.com/RafaelCangussuF/Trabalho_LabProg2_Aeroportos/blob/master/README.md
 
 Existem 3 arquivos principais nesse trabalho: Aeroporto, Grafos e SQL
 
