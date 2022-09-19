@@ -42,7 +42,8 @@ public class Aeroporto {
     private String Estado, Municipio;
 
     //Construtor do aeroporto
-    public Aeroporto(String sigla1, String Estado1, String Municipio1, double Latitude1, double longitude1){
+    public Aeroporto(String sigla1, String Estado1, String Municipio1,
+                     double Latitude1, double longitude1){
         setEstado(Estado1);
         setLatitude(Latitude1);
         setSigla(sigla1);
@@ -106,8 +107,9 @@ public class SQL {
     public static List<Aeroporto> ResultadoSQL() {
         List<Aeroporto> air = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos",
-                                                                 "root", "toor");
+            Connection connection = DriverManager
+                                    .getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos",
+                                                    "root", "toor");
 
             Statement statement = connection.createStatement();
 
@@ -137,8 +139,9 @@ public class SQL {
     public static void InserirSQL(String pesquisa, int i) {
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos",
-                                                                 "root", "toor");
+            Connection connection = DriverManager
+                                    .getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos",
+                                                    "root", "toor");
 
             Statement statement = connection.createStatement();
 
@@ -261,7 +264,8 @@ public static Graph exampleGraph() {
 
         return g;
     }
- ```
+
+```
 
 
 - A main usa os métodos citados anteriormente para realizar a pesquisa
@@ -271,6 +275,8 @@ entre origem e destino do grafo construído por exampleGraph. Após isso a pesqu
 para poder serem realizadas novas pesquisas caso o usuário queira. Nos comentários dos códigos possuem explicações sobre o que as funções da Graphstream fazem.
 
 ```
+
+
 public static void main(String[] args) {
         int id = 0;
         boolean game = true;
@@ -318,7 +324,8 @@ public static void main(String[] args) {
             System.out.println(dijkstra.getPath(g.getNode(b)));
             System.out.println(dijkstra.getPathLength(g.getNode(b)));
 
-            // inserção da pesquisa feita no banco de dados com o primeiro nó sendo origem e o último o destino
+            /* inserção da pesquisa feita no banco de dados
+               com o primeiro nó sendo origem e o último o destino */
             c = dijkstra.getPath(g.getNode(b)).toString();
             InserirSQL(c, id);
 
