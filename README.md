@@ -98,7 +98,8 @@ public class SQL {
     public static List<Aeroporto> ResultadoSQL() {
         List<Aeroporto> air = new ArrayList<>();
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos", "root", "toor");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos",
+                                                                 "root", "toor");
 
             Statement statement = connection.createStatement();
 
@@ -125,7 +126,8 @@ public class SQL {
     public static void InserirSQL(String pesquisa, int i) {
 
         try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos", "root", "toor");
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc-aeroportos",
+                                                                 "root", "toor");
 
             Statement statement = connection.createStatement();
 
@@ -168,7 +170,8 @@ public class SQL {
   - Nele, lai e laj são as latitudes de i e j respectivamente, enquanto loi e loj são as longitudes de i e j
 
 ```
-//Função de nome d(abreviação de distância) usada para calcular a distância entre dois aeroportos a partir de suas coordenadas
+/*Função de nome d(abreviação de distância) usada para calcular a distância entre
+  dois aeroportos a partir de suas coordenadas*/
     public static double d(Double lai, Double loi, Double laj, Double loj){
         lai = Math.toRadians(lai);
         laj = Math.toRadians(laj);
@@ -178,7 +181,8 @@ public class SQL {
         double delta1 = Math.abs(lai-laj);
         double delta2 = Math.abs(loi-loj);
 
-        double a = Math.pow(Math.sin(delta1/2),2)+ Math.cos(lai)*(Math.cos(laj))*(Math.pow(Math.sin(delta2/2),2));
+        double a = Math.pow(Math.sin(delta1/2),2)+ 
+                  + Math.cos(lai)*(Math.cos(laj))*(Math.pow(Math.sin(delta2/2),2));
         return 2*6.371*(Math.asin(Math.pow(a,0.5)));
     }
 ```
@@ -187,7 +191,8 @@ public class SQL {
 de sua sigla, por fim, retorna a sigla do aeroporto como uma String
 
 ```
-//Menu é utilizado para receber uma sigla de estado e devolver a sigla dos aeroportos internacionais daquele estado
+/*Menu é utilizado para receber uma sigla de estado
+  e devolver a sigla dos aeroportos internacionais daquele estado*/
     public static String Menu(String Sigla_Estado){
         //Criando a lista com os aeroportos
         List<Aeroporto> air = new ArrayList<>();
@@ -230,7 +235,14 @@ public static Graph exampleGraph() {
         while(i<40){
             j=i;
             while(j<40) {
-                g.addEdge(air.get(i).getSigla()+air.get(j).getSigla(),air.get(i).getSigla(),air.get(j).getSigla()  ).setAttribute("length", d(air.get(i).getLatitude(), air.get(i).getLongitude(), air.get(j).getLatitude(), air.get(j).getLongitude()));
+            //O pulo da linha foi realizado para melhor formatação na conversão pdf
+                g.addEdge(air.get(i).getSigla()+air.get(j).getSigla(),
+                          air.get(i).getSigla(),
+                          air.get(j).getSigla())
+                          .setAttribute("length", d(air.get(i).getLatitude(),
+                                        air.get(i).getLongitude(),
+                                        air.get(j).getLatitude(),
+                                        air.get(j).getLongitude()));
                 j++;
             }
             i++;
@@ -256,15 +268,22 @@ public static void main(String[] args) {
         
         // Comprimento das arestas é armazenado no atributo length
         // O comprimento de um caminho é a soma dos comprimentos(length) das arestas do caminho
-        // Criação de um objeto do tipo Dijkstra, será utilizada no decorrer do código para realizar o algoritmo a partir do grafo g
+        
+        /* Criação de um objeto do tipo Dijkstra,
+           será utilizada no decorrer do código para realizar o algoritmo a partir do grafo g*/
         Dijkstra dijkstra = new Dijkstra(Dijkstra.Element.EDGE, null, "length");
 
 
         Scanner scan = new Scanner(System.in);
-        // escolha vai ser utilizado para parar ou não o loop gerado por game, utilizado a partir da linha 297
+        /* escolha vai ser utilizado para parar ou não o loop gerado por game,
+           utilizado a partir da linha 297*/
+        
         int escolha;
-        // as strings a, b e c serão respectivamente, a sigla do nó de origem, a sigla do nó de destino, a string que armazena o resultado da pesquisa,
-        // ou seja, o Path entre a e b
+        
+        /* as strings a, b e c serão respectivamente, a sigla do nó de origem,
+           a sigla do nó de destino e a string que armazena o resultado da pesquisa,
+           ou seja, o Path entre a e b*/
+           
         String a, b, c;
         while(game) {
 
