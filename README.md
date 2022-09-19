@@ -104,6 +104,8 @@ public class SQL {
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery("select * from airportData3");
+            /*Recebimento do resultSet e colocação dos valores obtidos nos atributos
+              de um aeroporto */
             while (resultSet.next()) {
                 Aeroporto aero = new Aeroporto();
                 aero.setSigla(resultSet.getString("Sigla"));
@@ -111,13 +113,14 @@ public class SQL {
                 aero.setEstado(resultSet.getString("state"));
                 aero.setLatitude(resultSet.getDouble("latitude"));
                 aero.setLongitude(resultSet.getDouble("longitude"));
+                //Adição do aeroporto à ArrayList criada no início do método
                 air.add(aero);
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        // retorna a lista de aeroportos
         return air;
 
     }
@@ -140,7 +143,7 @@ public class SQL {
                     "?)";
 
             PreparedStatement prepstmt = connection.prepareStatement(sql);
-
+            //Salvar a pesquisa no banco de dados e i como idHistórico
             prepstmt.setInt(1, i );
             prepstmt.setString(2, pesquisa);
             prepstmt.execute();
