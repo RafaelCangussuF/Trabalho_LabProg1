@@ -269,10 +269,10 @@ public static void main(String[] args) {
         while(game) {
 
             // Recebimento dos dados para realisar a pesquisa
-            System.out.println("Digite o estado do no de origem: ");
+            System.out.println("Digite a sigla do estado do no de origem ou DF para o Distrito Federal: ");
             a = scan.nextLine();
             a = Menu(a);
-            System.out.println("Digite o estado do no de destino: ");
+            System.out.println("Digite a sigla do estado do no de destino ou DF para o Distrito Federal: ");
             b = scan.nextLine();
             b = Menu(b);
 
