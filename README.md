@@ -253,7 +253,7 @@ public static Graph exampleGraph() {
                 g.addEdge(air.get(i).getSigla()+air.get(j).getSigla(),
                           air.get(i).getSigla(),
                           air.get(j).getSigla())
-                          .setAttribute("length", d(air.get(i).getLatitude(),
+                          .setAttribute("length", distancia(air.get(i).getLatitude(),
                                         air.get(i).getLongitude(),
                                         air.get(j).getLatitude(),
                                         air.get(j).getLongitude()));
