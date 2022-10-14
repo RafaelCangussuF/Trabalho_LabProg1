@@ -186,7 +186,7 @@ public class SQL {
 ```
 /*Função de nome d(abreviação de distância) usada para calcular a distância entre
   dois aeroportos a partir de suas coordenadas*/
-    public static double d(Double lai, Double loi, Double laj, Double loj){
+    public static double distancia(Double lai, Double loi, Double laj, Double loj){
         lai = Math.toRadians(lai);
         laj = Math.toRadians(laj);
         loi = Math.toRadians(loi);
